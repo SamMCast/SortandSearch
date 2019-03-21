@@ -21,3 +21,4 @@ List of available commands
 
 -q specifies the type of sorting algorithm you wish to use and in this case quick sort. Yet to be implemented
 
+-h gives the user more info about how what the flag parameterrs do.

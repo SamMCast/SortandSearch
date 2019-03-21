@@ -15,8 +15,16 @@
 using namespace std;
 
 void print_usage(){
-  printf("Usage: sort -r <min range,maxrange> -s <selection sort> -u <uniform distribution> -m <merge sort> -q <quicksort>\n");
-  exit(2);
+  printf("Usage: mysort -h <Help> -r <minrange,maxrange> -s <selection sort> -u <uniform distribution> -m <merge sort> -q <quicksort>\n");
+}
+
+void printHelpGuid(){
+  printf("The -r is a mandatory option flag and must be followed a 2 non-negative numbers separated by a comma specifiy the range of values that mysort initializes. E.G mysort -r 10, 50\n");
+  printf("The -u an optional parameter flag specifies that the list to be created be uniformly distributed.\n");
+  printf("The -s is a parameter flag that specifies mysort sort the item list using selection sort.\n");
+  printf("The -m is a parameter flag that specifies mysort sort the item list using merge sort.\n");
+  printf("The -q is a parameter flag that specifies mysort sort the item list using quicksort.\n");
+  printf("\n");
 }
 
 int findSmallest(const vector<int> & nums, int start){
@@ -392,9 +400,10 @@ int main(int argc, char * argv []){
   vector<int> nums;
   string size;
   bool UFlag = false;
+  bool HFlag = false;
 
 // Parse command line arguments 
-  while((opt = getopt(argc, argv, ":r:msqu")) != -1){
+  while((opt = getopt(argc, argv, ":r:mshqu")) != -1){
     switch(opt){
       case 'r':     // initialize a vector of size optarg
         size = optarg;
@@ -405,6 +414,10 @@ int main(int argc, char * argv []){
 
       case 'u':
         UFlag = true;
+        break;  
+      
+      case 'h':
+        HFlag = true;
         break;
 
       case 's':
@@ -416,15 +429,27 @@ int main(int argc, char * argv []){
       case ':':  // The user entered a flag but not an associated value
         printf(" Error. Option needs a value\n");
         print_usage();
+        exit(2);
         break;
 
       case '?':  // The user entered an unknown flag
         printf("Unknown option: %c\n", optopt);
         print_usage();
+        exit(2);
         break;
     }
    }
 
+
+  if(HFlag ){
+    print_usage();
+    if(commands.empty()){
+      printHelpGuid();
+      exit(0);
+    }
+    else
+      exit(2);
+  }
   nums = randomize_vector(size, UFlag);
   parseArguments(commands, nums); 
 
