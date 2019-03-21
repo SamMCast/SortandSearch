@@ -15,7 +15,7 @@
 using namespace std;
 
 void print_usage(){
-  printf("Usage: sort -r <max and min range> -s <selection sort> -u <uniform> -m <merge sort> -q <quicksort>\n");
+  printf("Usage: sort -r <min range,maxrange> -s <selection sort> -u <uniform distribution> -m <merge sort> -q <quicksort>\n");
   exit(2);
 }
 
